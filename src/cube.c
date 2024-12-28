@@ -38,7 +38,7 @@ void	scale_cords(t_cord *prime)
 	int	i;
 
 	i = -1;
-	while (i++ < 4)
+	while (++i < 4)
 	{
 		prime[i].x = (prime[i].x * (WIDTH / 2));
 		prime[i].y = (prime[i].y * (HEIGHT / 2));
@@ -55,7 +55,7 @@ int	draw_face(t_mlx *cub, t_cord *face)
 		if (face[i].z + DEPTH == 0)
 			return (-1);
 	i = -1;
-	while (i++ < 4)
+	while (++i < 4)
 	{
 		prime[i].x = face[i].x / (face[i].z + DEPTH);
 		prime[i].y = face[i].y / (face[i].z + DEPTH);
@@ -76,7 +76,6 @@ int	draw_cube(t_mlx *cub)
 	init_face(cube.Bface, cube.center, 1, BACK);
 	if (draw_face(cub, cube.Fface) == -1)
 		return (-1);
-	printf("%s\n", "here");
 	if (draw_face(cub, cube.Bface) == -1)
 		return (-1);
 	return (0);
