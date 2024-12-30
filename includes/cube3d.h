@@ -10,7 +10,8 @@
 
 # define WIDTH 800
 # define HEIGHT 600
-# define DEPTH 100
+# define FOV 60
+# define PIXEL 10
 
 enum FACE
 {
@@ -49,8 +50,7 @@ void	draw_grid_x(t_mlx *cub, int diff);
 void	draw_grid_y(t_mlx *cub, int diff);
 
 //draw cube
-int		draw_cube(t_mlx *cub);
-int		draw_face(t_mlx *cub, t_cord *face);
-void	init_face(t_cord *face, t_cord center, int size, int side);
+int		draw_cube(t_mlx *cub, int size);
+
 
 #endif

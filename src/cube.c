@@ -21,62 +21,63 @@ void	init_face(t_cord *face, t_cord center, int size, int side)
 	face[3].z = center.z + size * z;
 }
 
-void	connect_dots(t_mlx *cub, t_cord *prime)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		draw_line(cub, prime[i], prime[(i + 1) % 4]);
-		i += 2;
-	}
-}
-
-void	scale_cords(t_cord *prime)
+int	DepthCords(t_cube *cube)
 {
 	int	i;
 
 	i = -1;
 	while (++i < 4)
 	{
-		prime[i].x = (prime[i].x * (WIDTH / 2));
-		prime[i].y = (prime[i].y * (HEIGHT / 2));
-	}
-}
-
-int	draw_face(t_mlx *cub, t_cord *face)
-{
-	t_cord	prime[4];
-	int		i;
-
-	i = -1;
-	while (i++ < 4)
-		if (face[i].z + DEPTH == 0)
+		if ((cube->Bface[i].z + FOV) == 0)
 			return (-1);
-	i = -1;
+		cube->Bface[i].x = cube->Bface[i].x / (cube->Bface[i].z + FOV);
+	}
+		i = -1;
 	while (++i < 4)
 	{
-		prime[i].x = face[i].x / (face[i].z + DEPTH);
-		prime[i].y = face[i].y / (face[i].z + DEPTH);
-		prime[i].z = 0;
+		if ((cube->Fface[i].z + FOV) == 0)
+			return (-1);
+		cube->Fface[i].x = cube->Fface[i].x / (cube->Fface[i].z + FOV);
 	}
-	i = -1;
-	scale_cords(prime);
-	connect_dots(cub, prime);
 	return (0);
 }
 
-int	draw_cube(t_mlx *cub)
+void	connect_cube(t_mlx *mlx, t_cube cube)
+{
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+	draw_line(mlx, , );
+}
+
+int	draw_cube(t_mlx *mlx, int size)
 {
 	t_cube cube;
 
 	init_cord(&cube.center, WIDTH / 2, HEIGHT / 2, 0);
-	init_face(cube.Fface, cube.center, 1, FRONT);
-	init_face(cube.Bface, cube.center, 1, BACK);
-	if (draw_face(cub, cube.Fface) == -1)
+	init_face(cube.Bface, cube.center, size * PIXEL, BACK);
+	init_face(cube.Fface, cube.center, size * PIXEL, FRONT);
+	if (DepthCords(&cube) == -1)
 		return (-1);
-	if (draw_face(cub, cube.Bface) == -1)
-		return (-1);
-	return (0);
+	connect_cube(&mlx, cube);
+
 }
