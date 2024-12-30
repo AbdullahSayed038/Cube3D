@@ -7,7 +7,7 @@ int	main(void)
 
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WIDTH, HEIGHT, "Cube3D");
-	if (draw_mlxe(&mlx, 10) == -1)
+	if (draw_cube(&mlx, 10) == -1)
 		return (-1);
 	mlx_loop(mlx.mlx);
 	return (0);

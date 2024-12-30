@@ -10,7 +10,7 @@
 
 # define WIDTH 800
 # define HEIGHT 600
-# define FOV 60
+# define FOV 10
 # define PIXEL 10
 
 enum FACE
