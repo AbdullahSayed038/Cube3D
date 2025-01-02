@@ -4,32 +4,32 @@ void	init_faceF(t_cord *face, t_cord center, int size)
 {
 	face[0].x = center.x - size;
 	face[0].y = center.y + size;
-	face[0].z = center.z - (size / 2);
+	face[0].z = center.z - (size / 4);
 	face[1].x = center.x + size;
 	face[1].y = center.y + size;
-	face[1].z = center.z - (size / 2);
+	face[1].z = center.z - (size / 4);
 	face[2].x = center.x - size;
 	face[2].y = center.y - size;
-	face[2].z = center.z - (size / 2);
+	face[2].z = center.z - (size / 4);
 	face[3].x = center.x + size;
 	face[3].y = center.y - size;
-	face[3].z = center.z - (size / 2);
+	face[3].z = center.z - (size / 4);
 }
 
 void	init_faceB(t_cord *face, t_cord center, int size)
 {
 	face[0].x = center.x - size;
 	face[0].y = center.y + size;
-	face[0].z = center.z + (size / 2);
+	face[0].z = center.z + (size / 4);
 	face[1].x = center.x + size;
 	face[1].y = center.y + size;
-	face[1].z = center.z + (size / 2);
+	face[1].z = center.z + (size / 4);
 	face[2].x = center.x - size;
 	face[2].y = center.y - size;
-	face[2].z = center.z + (size / 2);
+	face[2].z = center.z + (size / 4);
 	face[3].x = center.x + size;
 	face[3].y = center.y - size;
-	face[3].z = center.z + (size / 2);
+	face[3].z = center.z + (size / 4);
 }
 
 int	DepthCords(t_cube *cube)
@@ -41,7 +41,7 @@ int	DepthCords(t_cube *cube)
 	{
 		if ((cube->Bface[i].z + FOV) == 0)
 			return (-1);
-		cube->Bface[i].x = cube->Bface[i].x / (cube->Bface[i].z + FOV / 10);
+		cube->Bface[i].x = cube->Bface[i].x / (cube->Bface[i].z + FOV);
 	}
 	i = -1;
 	while (++i < 4)
@@ -109,10 +109,10 @@ int	draw_cube(t_mlx *mlx, int size)
 	int i;
 	float SCALE_FACTOR;
 
-	SCALE_FACTOR = fmin(WIDTH, HEIGHT) / (4 * size);
+	SCALE_FACTOR = fmin(WIDTH, HEIGHT) / (8 * size); // Adjust divisor for better scaling
 	init_cord(&cube.center, WIDTH / 2, HEIGHT / 2, -FOV);
-	init_faceB(cube.Bface, cube.center, size * PIXEL);
-	init_faceF(cube.Fface, cube.center, size * PIXEL);
+	init_faceB(cube.Bface, cube.center, (size * PIXEL) / 2);
+	init_faceF(cube.Fface, cube.center, (size * PIXEL) / 2);
 	if (DepthCords(&cube) == -1)
 		return (-1);
 	i = -1;

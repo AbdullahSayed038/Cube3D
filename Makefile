@@ -1,5 +1,5 @@
 NAME        = cube3d
-SRCS        = src/main.c src/draw.c src/grid.c src/cube.c
+SRCS        = src/main.c src/draw.c src/grid.c src/cube.c src/map.c src/movement.c
 OBJS        = $(SRCS:.c=.o)
 CC          = cc
 CFLAGS      = -Wall -Werror -Wextra -g
